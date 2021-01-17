@@ -462,12 +462,17 @@ h2 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  overflow: hidden;
 }
 
 .work .box img {
   max-width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -webkit-transition: -webkit-transform .2s ease-in-out;
+  transition: -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out;
+  transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
 }
 
 .work .box a {
@@ -498,6 +503,11 @@ h2 {
           transition-delay: .2s;
 }
 
+.work .box:hover img {
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+}
+
 .work .box:hover a {
   opacity: .8;
 }
@@ -513,68 +523,167 @@ h2 {
 }
 
 .contact .field {
+  margin: auto;
   position: relative;
   overflow: hidden;
+  border: 1px solid;
+  border-radius: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 220px;
   margin-bottom: 15px;
+  border-color: #191855;
+  background: #0d0c2f;
 }
 
-.contact .field label {
-  font-size: 14px;
+.contact .field i {
+  font-size: 16px;
+  display: inline-block;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #ccc;
+  color: #999;
+  margin: 5px;
 }
 
 .contact .field textarea,
 .contact .field input {
   color: #ccc;
-  height: 30px;
-  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 10px;
   background: none;
   border: none;
-  border-bottom: 2px solid #0d0c2f6b;
+  resize: none;
 }
 
 .contact .field textarea:focus,
 .contact .field input:focus {
-  border-color: #006390;
+  outline: none;
 }
 
 .contact .field i.fa-check {
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  color: #082;
+  display: none;
+  background: none !important;
+  color: #080;
+  padding-top: 5px;
+  text-align: center;
 }
 
-.contact .field.err label {
-  color: #f02;
+.contact .field.focus {
+  border-color: #3cb4de !important;
+  -webkit-animation: move .8s ease-in-out forwards;
+          animation: move .8s ease-in-out forwards;
 }
 
-.contact .field.err input, .contact .field.err textarea {
-  border-bottom: 2px solid #f02 !important;
+.contact .field.focus i {
+  background: #8bcdcd;
+  color: #1f6f8b;
+}
+
+.contact .field.err {
+  border-color: #de1910 !important;
+}
+
+.contact .field.err i {
+  background: #7900008f;
+  color: #de1910;
 }
 
 .contact .field.success i.fa-check {
-  opacity: 1;
+  display: block;
 }
 
-.contact .field textarea {
-  min-height: 80px;
-  resize: none;
+.contact .field:last-of-type {
+  min-height: 100px;
+}
+
+.contact .field:last-of-type i:first-child {
+  margin-top: 30px;
+}
+
+.contact .formErr {
+  color: #f00;
+  font-size: 14px;
+  margin: 10px 0;
+  display: none;
 }
 
 .contact button {
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 15px;
   border: none;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 20px;
   background: #0d0c2f;
   border: 1px solid #0d0c2f;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
+  position: relative;
+  width: 150px;
 }
 
 .contact button:hover {
   background: none;
+}
+
+.contact button:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: #2225;
+}
+
+.contact button:active:before {
+  -webkit-animation: flash .8s ease;
+          animation: flash .8s ease;
+}
+
+@-webkit-keyframes flash {
+  0% {
+    width: 0%;
+    height: 0%;
+  }
+  50% {
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    width: 0%;
+    height: 0%;
+  }
+}
+
+@keyframes flash {
+  0% {
+    width: 0%;
+    height: 0%;
+  }
+  50% {
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    width: 0%;
+    height: 0%;
+  }
 }
 
 .skills {
@@ -775,14 +884,9 @@ h2 {
   color: unset;
 }
 
-.light .contact textarea,
-.light .contact input {
-  border-bottom: 2px solid #d6d6d6;
-}
-
-.light .contact textarea:focus,
-.light .contact input:focus {
-  border-color: #6dbeff;
+.light .contact .field {
+  border-color: #d6d6d6;
+  background: #eee;
 }
 
 .light .contact button {
@@ -796,5 +900,23 @@ h2 {
 .light .contact button:hover {
   background: none;
   color: #373738;
+}
+
+@-webkit-keyframes move {
+  from {
+    border-left: 1px dashed;
+  }
+  to {
+    border-left: 8px dashed;
+  }
+}
+
+@keyframes move {
+  from {
+    border-left: 1px dashed;
+  }
+  to {
+    border-left: 8px dashed;
+  }
 }
 /*# sourceMappingURL=main.css.map */

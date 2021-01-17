@@ -404,12 +404,14 @@ h2 {
     position: relative;
     padding: 3px;
     display: flex;
+    overflow:hidden;
     img {
       max-width: 100%;
       object-fit:cover;
+      transition:transform .2s ease-in-out
     }
-
     a {
+
       position: absolute;
       top: 0;
       left: 0;
@@ -425,10 +427,13 @@ h2 {
       transition: opacity .2s ease-in-out;
       transition-delay: .2s;
     }
-
+    &:hover img {
+      transform:scale(1.5)
+    }
     &:hover a {
       opacity: .8
     }
+
   }
 }
 
@@ -441,71 +446,128 @@ h2 {
     padding: 10px 20px;
     margin-top: 10px
   }
-
-  .field {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 15px;
-
-    label {
-      font-size: 14px;
-    }
-
-    textarea,
-    input {
-      color:#ccc;
+  .field{
+    margin:auto;
+    position:relative;
+    overflow:hidden;
+    border:1px solid;
+    border-radius:25px;
+    display:flex;
+    min-width:220px;
+    margin-bottom:15px;
+    border-color: #191855;
+    background: #0d0c2f;
+    i{
+      font-size:16px;
+      display:inline-block;
+      border-radius:50%;
+      width: 30px;
       height: 30px;
-      width: 100%;
-      background: none;
-      border: none;
-      border-bottom: 2px solid #0d0c2f6b;
-      &:focus {
-        border-color: #006390
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:#ccc;
+      color:#999;
+      margin:5px;
+    }
+    textarea,
+    input{
+      color:#ccc;
+      flex:1;
+      padding:10px;
+      background:none;
+      border:none;
+      resize:none;
+      &:focus{
+        outline:none;
       }
     }
-    
-    i.fa-check {
-      opacity: 0;
-      position: absolute;
-      right: 0;
-      color: #082;
+    i.fa-check{
+      display:none;
+      background:none !important;
+      color:#080;
+      padding-top: 5px;
+      text-align:center;
+    }
+    &.focus{
+      border-color:#3cb4de !important;
+      animation:move .8s ease-in-out forwards;
+      i{
+        background:#8bcdcd;
+        color:#1f6f8b;
+      }
     }
     &.err {
-      label{
-        color:#f02;
-      }
-      input,textarea{
-        border-bottom: 2px solid #f02 !important;
+      border-color:#de1910 !important;
+      i{
+        background: #7900008f;
+        color: #de1910;
       }
     }
     &.success {
       i.fa-check {
-        opacity: 1;
+        display:block;
       }
     }
-
-    textarea {
-      min-height: 80px;
-      resize: none;
+    &:last-of-type{
+      min-height:100px;
+      i:first-child{
+        margin-top: 30px;
+      }
     }
   }
-
+  .formErr{
+    color:#f00;
+    font-size:14px;
+    margin:10px 0;
+    display:none;
+  }
   button {
     cursor:pointer;
-    padding: 10px 15px;
+    padding: 15px;
     border: none;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 20px;
     background: #0d0c2f;
     border:1px solid #0d0c2f;
     transition: all .2s ease-in-out;
+    position:relative;
+    width:150px;
     &:hover {
       background: none;
       // color: #0d0c2f;
     }
+    &:before{
+      content:'';
+      position:absolute;
+      top:50%;
+      left:50%;
+      width:0%;
+      height:0%;
+      transform:translate(-50%,-50%);
+      background:#2225;
+    }
+    &:active:before{
+      animation:flash .8s ease ;
+    }
   }
 }
 
+@keyframes flash{
+
+  0% {
+    width:0%;
+      height:0%;
+  }
+  50%{
+    width:100%;
+      height:100%;
+  } 
+  100%{
+    width:0%;
+      height:0%;
+  } 
+}
 
 .skills {
   display: flex;
@@ -686,15 +748,18 @@ h2 {
 
   .contact {
 
-    textarea,
-    input {
-      border-bottom: 2px solid #d6d6d6;
+    // textarea,
+    // input {
+    //   border-bottom: 2px solid #d6d6d6;
 
-      &:focus {
-        border-color: #6dbeff;
-      }
+    //   &:focus {
+    //     border-color: #6dbeff;
+    //   }
+    // }
+    .field{
+      border-color: #d6d6d6;
+      background: #eee;  
     }
-
     button {
       color: #fff;
       background: #373738;
@@ -709,3 +774,15 @@ h2 {
 }
 
 
+@keyframes move {
+  from {
+    
+    border-left:1px dashed;
+
+    
+  }
+  to{
+    border-left:8px dashed;
+    
+  }
+}

@@ -185,18 +185,17 @@ filters.forEach(element => {
   })
 })
 
+
+function downloadCV (){
+  window.open('https://drive.google.com/file/d/1gPf_HnKZgmFOTyZIDiOEqhy51xdsTNQL/view',"_blank")
+}
+
 let name = document.querySelector('form .name')
 let email = document.querySelector('form .email')
 let phone = document.querySelector('form .phone')
 let message = document.querySelector('form .message')
 let buttonSend = document.querySelector('form button')
 
-const checkField = (e) => {
-  if(e.target.value === '')
-    e.target.parentElement.classList = 'field err'
-  else   
-    e.target.parentElement.classList = 'field success'
-}
 const checkEmail = (e) => {
   if(e.target.value === '')
     e.target.parentElement.classList = 'field err';
@@ -205,18 +204,18 @@ const checkEmail = (e) => {
   else   
     e.target.parentElement.classList = 'field success'
 }
-name.addEventListener('keyup',checkField); 
-message.addEventListener('keyup',checkField); 
 email.addEventListener('keyup',checkEmail); 
 
 const sendMessage = () => {
   if(name.value !== '' && email.value !== '' && email.value.indexOf('@') !== ''){
     Email.send({
+        // SecureToken : "3e45978d-9461-4cec-9a15-6ccb2a6b18d9",
         Host:"stmp.gmail.com",
         Username:"eldawyayman@yahoo.com",
-        Password:"A9B9072D3C556604E00892272524F1F2DBC2",
+        Password:"7EF5F2386BD118E3B07784CD8CD7F16B21EA",
         To : 'aymaneldawy@yahoo.com',
         From : email.value,
+        UseDefaultCredentials : false,
         Subject : "This is the subject",
         Body : `
           <div>
@@ -227,10 +226,30 @@ const sendMessage = () => {
     }).then(
       message => alert(message)
     );
+  } else{
+    document.querySelector('.formErr').style.display = 'block';
+    setTimeout(()=>{
+      document.querySelector('.formErr').style.display = 'none';
+    },2000)
   }
 }
 buttonSend.addEventListener('click',sendMessage)
 
-function donwloadCV (){
-  window.open('img/cv.pdf',"_blank")
+function _focus (that){
+  that.parentElement.classList.add('focus');
+  that.parentElement.classList.remove('success');
 }
+function _blur (that){
+   that.parentElement.classList.remove('focus');
+   if(that.value !== '')          
+     that.parentElement.classList.add('success');
+
+}
+function _keyup (e){
+  if(e.target.value === ''){
+    e.target.parentElement.classList.add('err');
+  } else {  
+    e.target.parentElement.classList.remove('err');
+  }
+}
+
