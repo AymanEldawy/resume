@@ -232,5 +232,5 @@ const sendMessage = () => {
 buttonSend.addEventListener('click',sendMessage)
 
 function donwloadCV (){
-  window.open('../img/cv.pdf',"_blank")
+  window.open('img/cv.pdf',"_blank")
 }
