@@ -212,7 +212,9 @@ email.addEventListener('keyup',checkEmail);
 const sendMessage = () => {
   if(name.value !== '' && email.value !== '' && email.value.indexOf('@') !== ''){
     Email.send({
-        SecureToken : "133f55a7-1917-4cda-9195-86d21f9a855d",
+        Host:"stmp.gmail.com",
+        Username:"eldawyayman@yahoo.com",
+        Password:"A9B9072D3C556604E00892272524F1F2DBC2",
         To : 'aymaneldawy@yahoo.com',
         From : email.value,
         Subject : "This is the subject",
