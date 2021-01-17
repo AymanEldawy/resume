@@ -204,7 +204,7 @@ const checkEmail = (e) => {
   else   
     e.target.parentElement.classList = 'field success'
 }
-email.addEventListener('keyup',checkEmail); 
+email.addEventListener('blur',checkEmail); 
 
 const sendMessage = () => {
   if(name.value !== '' && email.value !== '' && email.value.indexOf('@') !== ''){

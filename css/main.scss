@@ -466,8 +466,8 @@ h2 {
       display: flex;
       align-items: center;
       justify-content: center;
-      background:#ccc;
-      color:#999;
+      background:#191855;
+      color:#0d0c2f;
       margin:5px;
     }
     textarea,
@@ -759,6 +759,13 @@ h2 {
     .field{
       border-color: #d6d6d6;
       background: #eee;  
+      input,textarea{
+        color:#666;
+      }
+      i:first-child{
+        background:#ccc;
+        color:#999;
+      }
     }
     button {
       color: #fff;
@@ -776,10 +783,7 @@ h2 {
 
 @keyframes move {
   from {
-    
     border-left:1px dashed;
-
-    
   }
   to{
     border-left:8px dashed;
